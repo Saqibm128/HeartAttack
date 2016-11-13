@@ -28,6 +28,10 @@ public class USDAFoodInfo implements FoodDataInterface {
         this.listener = listener;
     }
 
+    public void setListener(Response.Listener<JSONObject> listener) {
+        this.listener = listener;
+    }
+
     @Override
     public List<Food> searchByName(String name) {
         List<Food> foods = new ArrayList<>();

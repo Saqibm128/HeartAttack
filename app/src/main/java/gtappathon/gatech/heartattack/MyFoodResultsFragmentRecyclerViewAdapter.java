@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class MyFoodResultsFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MyFoodResultsFragmentRecyclerViewAdapter.ViewHolder> {
 
-    private final List<Food> foodList;
+    List<Food> foodList;
     private final OnListFragmentInteractionListener mListener;
 
     public MyFoodResultsFragmentRecyclerViewAdapter(List<Food> items, OnListFragmentInteractionListener listener) {

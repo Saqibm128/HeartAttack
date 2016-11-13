@@ -1,5 +1,9 @@
 package gtappathon.gatech.heartattack;
 
+import com.android.volley.Response;
+
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -8,4 +12,5 @@ import java.util.List;
 
 public interface FoodDataInterface {
     public List<Food> searchByName(String name);
+    public void setListener(Response.Listener<JSONObject> listener);
 }

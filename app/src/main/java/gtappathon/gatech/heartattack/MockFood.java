@@ -1,5 +1,9 @@
 package gtappathon.gatech.heartattack;
 
+import com.android.volley.Response;
+
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,5 +23,10 @@ public class MockFood implements FoodDataInterface{
         if (name.equalsIgnoreCase("Soda"))
             foods.add(new Food("Soda", 75));
         return foods;
+    }
+
+    @Override
+    public void setListener(Response.Listener<JSONObject> listener) {
+
     }
 }

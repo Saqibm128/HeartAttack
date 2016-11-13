@@ -27,7 +27,7 @@ public class FoodResultsFragment extends Fragment {
     private int mColumnCount = 1;
     private OnListFragmentInteractionListener mListener;
     private List<Food> foods;
-    private RecyclerView.Adapter<MyFoodResultsFragmentRecyclerViewAdapter.ViewHolder> foodAdapter;
+    RecyclerView.Adapter<MyFoodResultsFragmentRecyclerViewAdapter.ViewHolder> foodAdapter;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -53,13 +53,15 @@ public class FoodResultsFragment extends Fragment {
         if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }
+        foods = (List<Food>)getArguments().getSerializable("foodList");
+        foodAdapter = new MyFoodResultsFragmentRecyclerViewAdapter(foods, mListener);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_foodresultsfragment_list, container, false);
-        foods = (List<Food>)getArguments().getSerializable("foodList");
+
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -69,7 +71,7 @@ public class FoodResultsFragment extends Fragment {
             } else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
-            foodAdapter = new MyFoodResultsFragmentRecyclerViewAdapter(foods, mListener);
+
             recyclerView.setAdapter(foodAdapter);
         }
         return view;
