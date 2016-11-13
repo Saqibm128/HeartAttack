@@ -35,7 +35,7 @@ public class MyFoodResultsFragmentRecyclerViewAdapter extends RecyclerView.Adapt
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = foodList.get(position);
         holder.mIdView.setText(foodList.get(position).name);
-        holder.mContentView.setText("Calories" + foodList.get(position).calories);
+        holder.mContentView.setText("Calories: Mystery!");
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

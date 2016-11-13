@@ -7,8 +7,8 @@ import java.util.List;
  * Created by Mohammed on 11/12/2016.
  */
 
-public class MockFood {
-    public static List<Food> searchByName(String name){
+public class MockFood implements FoodDataInterface{
+    public List<Food> searchByName(String name){
         ArrayList<Food> foods = new ArrayList<>();
         if (name.equalsIgnoreCase("Burger"))
             foods.add(new Food("Burger", 800));
@@ -18,7 +18,6 @@ public class MockFood {
             foods.add(new Food("Hotdog", 300));
         if (name.equalsIgnoreCase("Soda"))
             foods.add(new Food("Soda", 75));
-        foods.add(new Food("Air", 0));
         return foods;
     }
 }
