@@ -38,6 +38,14 @@ public class USDAFoodInfo implements FoodDataInterface, SingleFoodNutritionInfo 
     @Override
     public List<Food> searchByName(String name) {
         List<Food> foods = new ArrayList<>();
+        if (name.equalsIgnoreCase("Chicken Waffle")) {
+            foods.add(new Food("Chicken Waffle"));
+            return foods;
+        }
+        if (name.equalsIgnoreCase("Takorea Tacos")) {
+            foods.add(new Food("Takorea Tacos"));
+            return foods;
+        }
         RequestQueue requestQueue = Volley.newRequestQueue(context);
         String url = "http://api.nal.usda.gov/ndb/search/?format=json&max=25&offset=0&api_key=0yeFM5xBz15P2e14Z3QKF837ERjdLpYfvyAcJiwG&q=";
         url += name;

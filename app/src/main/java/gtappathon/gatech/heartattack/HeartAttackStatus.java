@@ -49,7 +49,7 @@ public class HeartAttackStatus {
         else if (points >= 1671) {
             return "HEART ATTACK! FINALLY!";
         } else {
-            return (new Integer(points/100)).toString();
+            return (new Integer(points/100 + 1)).toString();
         }
     }
 

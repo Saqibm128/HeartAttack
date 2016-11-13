@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/current_status"
-        android:textSize="15px">
+        android:textSize="50px">
     </TextView>
 
     <WebView
-        android:id="@+id/gif_holder"
+        android:id="@+id/gif"
         android:layout_below="@+id/current_status"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></WebView>

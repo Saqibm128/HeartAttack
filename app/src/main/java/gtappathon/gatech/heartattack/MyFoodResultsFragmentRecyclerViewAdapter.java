@@ -50,38 +50,67 @@ public class MyFoodResultsFragmentRecyclerViewAdapter extends RecyclerView.Adapt
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.foodItem = foodList.get(position);
         holder.foodName.setText(foodList.get(position).name);
-        holder.button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Food item = foodList.get(position);
-                USDAFoodInfo foodInfo = new USDAFoodInfo(parentContext, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject jsonObject) {
-                        Log.d("Nutrition Info", jsonObject.toString());
-                        Food f = new Food("Unknown");
-                        try {
-                            JSONArray foodNutrientInfo = jsonObject.getJSONObject("report").getJSONArray("foods").getJSONObject(0).getJSONArray("nutrients");
-                            JSONObject sugarInfo = foodNutrientInfo.getJSONObject(0);
-                            JSONObject fatInfo = foodNutrientInfo.getJSONObject(1);
-                            JSONObject calorieInfo = foodNutrientInfo.getJSONObject(3);
-                            f.calories = Double.parseDouble(calorieInfo.getString("value"));
-                            f.gramsFat = Double.parseDouble(fatInfo.getString("value"));
-                            f.gramsSugar = Double.parseDouble(sugarInfo.getString("value"));
-                            HeartAttackStatus.getInstance().addFood(f);
-                            GifHolder gifHolder = new GifHolder();
-                            FragmentManager fragmentManager = MainActivity.mainActivity.getFragmentManager();
-                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                            fragmentTransaction.replace(R.id.fragment_holder, gifHolder);
-                            fragmentTransaction.addToBackStack(null);
-                            fragmentTransaction.commit();
-                        } catch(JSONException j) {
-                            Log.e("JSON OBJECT", j.toString());
+        String name = holder.foodItem.name;
+        if (name.equalsIgnoreCase("Chicken Waffle")) {
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    HeartAttackStatus.getInstance().points += 10000;
+                    GifHolder gifHolder = new GifHolder();
+                    FragmentManager fragmentManager = MainActivity.mainActivity.getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_holder, gifHolder);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+        } else if (name.equalsIgnoreCase("Takorea Tacos")) {
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    HeartAttackStatus.getInstance().points += 10000;
+                    GifHolder gifHolder = new GifHolder();
+                    FragmentManager fragmentManager = MainActivity.mainActivity.getFragmentManager();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.fragment_holder, gifHolder);
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }
+            });
+        } else {
+            holder.button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Food item = foodList.get(position);
+                    USDAFoodInfo foodInfo = new USDAFoodInfo(parentContext, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject jsonObject) {
+                            Log.d("Nutrition Info", jsonObject.toString());
+                            Food f = new Food("Unknown");
+                            try {
+                                JSONArray foodNutrientInfo = jsonObject.getJSONObject("report").getJSONArray("foods").getJSONObject(0).getJSONArray("nutrients");
+                                JSONObject sugarInfo = foodNutrientInfo.getJSONObject(0);
+                                JSONObject fatInfo = foodNutrientInfo.getJSONObject(1);
+                                JSONObject calorieInfo = foodNutrientInfo.getJSONObject(3);
+                                f.calories = Double.parseDouble(calorieInfo.getString("value"));
+                                f.gramsFat = Double.parseDouble(fatInfo.getString("value"));
+                                f.gramsSugar = Double.parseDouble(sugarInfo.getString("value"));
+                                HeartAttackStatus.getInstance().addFood(f);
+                                GifHolder gifHolder = new GifHolder();
+                                FragmentManager fragmentManager = MainActivity.mainActivity.getFragmentManager();
+                                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                                fragmentTransaction.replace(R.id.fragment_holder, gifHolder);
+                                fragmentTransaction.addToBackStack(null);
+                                fragmentTransaction.commit();
+                            } catch (JSONException j) {
+                                Log.e("JSON OBJECT", j.toString());
+                            }
                         }
-                    }
-                });
-                foodInfo.getNutritionInfo(item);
-            }
-        });
+                    });
+                    foodInfo.getNutritionInfo(item);
+                }
+            });
+        }
 
         holder.foodItemView.setOnClickListener(new View.OnClickListener() {
             @Override

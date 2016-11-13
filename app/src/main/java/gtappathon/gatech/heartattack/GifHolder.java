@@ -7,7 +7,11 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -30,8 +34,25 @@ public class GifHolder extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
+    private Map<String, String> urlMap;
+
     public GifHolder() {
         // Required empty public constructor
+        urlMap = new HashMap<>();
+        urlMap.put("1", "http://d36rv60zdkz1hi.cloudfront.net/supper/uploads/2014/08/url.gif");
+        urlMap.put("2", "https://media.giphy.com/media/HWAOHq3SObKTK/giphy.gif");
+        urlMap.put("3", "http://media1.giphy.com/media/K5CULzwBU03HG/giphy.gif");
+        urlMap.put("4", "http://media.tumblr.com/tumblr_ly04o4NxyG1qlvj4w.gif");
+        urlMap.put("5", "http://media.tumblr.com/tumblr_lfl0nuPiYO1qdzjnp.gif");
+        urlMap.put("6", "http://images.firstwefeast.com/complex/image/upload/qir71keq7xkmlwye7sma.gif");
+        urlMap.put("7", "https://thoughtcatalog.files.wordpress.com/2013/07/4.gif?w=351&h=262");urlMap.put("1", "http://d36rv60zdkz1hi.cloudfront.net/supper/uploads/2014/08/url.gif");
+        urlMap.put("8", "https://spakwillsnack.files.wordpress.com/2016/04/102936-kung-fu-panda-eating-gif-imgur-4spm.gif?w=450");
+        urlMap.put("9", "https://m.popkey.co/88f3e8/OV6aa.gif");
+        urlMap.put("10", "https://thoughtcatalog.files.wordpress.com/2013/07/5.gif?w=430&h=288");
+        urlMap.put("11", "http://stream1.gifsoup.com/view4/2034469/pie-eating-contest-o.gif");
+        urlMap.put("12", "https://media.tenor.co/images/4585114d8e85229117ca3d5b4f4da7a9/raw");
+        urlMap.put("13", "https://andelino.files.wordpress.com/2015/02/good-news-bad-news-04.gif");
+        urlMap.put("HEART ATTACK! FINALLY!", "https://uproxx.files.wordpress.com/2014/04/joff-01.gif?w=650");
     }
 
     /**
@@ -69,6 +90,15 @@ public class GifHolder extends Fragment {
         TextView currentStatus = (TextView)view.findViewById(R.id.current_status);
         currentStatus.setText("You are at " + HeartAttackStatus.getInstance().points + " clots"
                 + "\nYou are at level " + HeartAttackStatus.getInstance().getLevel());
+        WebView mWebView2 =  (WebView)(view.findViewById(R.id.gif));
+        mWebView2.getSettings().setJavaScriptEnabled(true);
+        mWebView2.getSettings().setLoadWithOverviewMode(true);
+        mWebView2.getSettings().setUseWideViewPort(true);
+        mWebView2.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+        mWebView2.setScrollbarFadingEnabled(true);
+        String status = HeartAttackStatus.getInstance().getLevel();
+        mWebView2.loadDataWithBaseURL(urlMap.get(status), "<img src=\"banner5.png\" height=\"98%\" width=\"100%\"/>", "text/html", "utf-8", null);
+        mWebView2.loadUrl(urlMap.get(status));
         return view;
     }
 
