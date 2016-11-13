@@ -1,6 +1,7 @@
 package gtappathon.gatech.heartattack;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -10,6 +11,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ import java.util.List;
  * Created by Mohammed on 11/12/2016.
  */
 
-public class USDAFoodInfo implements FoodDataInterface {
+public class USDAFoodInfo implements FoodDataInterface, SingleFoodNutritionInfo {
     private Context context;
     private Response.Listener<JSONObject> listener;
     public USDAFoodInfo(Context context, Response.Listener<JSONObject> listener) {
@@ -52,5 +55,20 @@ public class USDAFoodInfo implements FoodDataInterface {
         });
         requestQueue.add(jsonObjectRequest);
         return foods;
+    }
+
+    @Override
+    public Food getNutritionInfo(Food f) {
+        RequestQueue requestQueue = Volley.newRequestQueue(context);
+        String url = "http://api.nal.usda.gov/ndb/nutrients/?format=json&api_key=0yeFM5xBz15P2e14Z3QKF837ERjdLpYfvyAcJiwG&nutrients=205&nutrients=204&nutrients=208&nutrients=269&ndbno=";
+        url += f.ndbno;
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, url, null, listener, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Volley Error, ndbno", error.toString());
+            }
+        });
+        requestQueue.add(jsonObjectRequest);
+        return null;
     }
 }

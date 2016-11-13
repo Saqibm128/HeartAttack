@@ -6,8 +6,10 @@ package gtappathon.gatech.heartattack;
 
 public class Food {
     String name;
-    int calories;
+    double calories;
     int ndbno;
+    double gramsSugar;
+    double gramsFat;
 
     public Food (String name, int calories){
         this.name = name;

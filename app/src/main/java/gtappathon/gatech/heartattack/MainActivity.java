@@ -1,7 +1,9 @@
 package gtappathon.gatech.heartattack;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -19,16 +21,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.Exchanger;
 
-public class MainActivity extends AppCompatActivity implements FoodResultsFragment.OnListFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity implements FoodResultsFragment.OnListFragmentInteractionListener, GifHolder.OnFragmentInteractionListener {
 
     FoodDataInterface foodInfo;
     FoodFragmentListener listener;
+    static MainActivity mainActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        mainActivity = this;
         listener = new FoodFragmentListener();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Fragment gifHolder = new GifHolder();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_holder, gifHolder);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
         final SearchView searchView = (SearchView) findViewById(R.id.search_bar);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
@@ -84,6 +94,11 @@ public class MainActivity extends AppCompatActivity implements FoodResultsFragme
 
     @Override
     public void onListFragmentInteraction(Food item) {
+
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
     }
 }
