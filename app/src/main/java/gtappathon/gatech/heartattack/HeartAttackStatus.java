@@ -14,22 +14,22 @@ public class HeartAttackStatus {
     int points;
     private static HeartAttackStatus heartAttackStatus;
     private Map<Integer, Movie> storedMovies;
-//    private Thread countDown = new Thread() {
-//        public void run() {
-//            while (true) {
-//                if (System.currentTimeMillis() % (5 * 1000) == 0 && points > 300)
-//                    points -= 200;
-//                try {
-//                    wait();
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    };
+    private static Thread countDown = new Thread() {
+        public void run() {
+            while (true) {
+                if (heartAttackStatus.points > 100)
+                HeartAttackStatus.heartAttackStatus.points -= 10;
+                try {
+                    sleep(500);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    };
     private HeartAttackStatus() {
         points = 0;
-//        countDown.start();
+        countDown.start();
     }
     public static HeartAttackStatus getInstance() {
         if (heartAttackStatus == null)

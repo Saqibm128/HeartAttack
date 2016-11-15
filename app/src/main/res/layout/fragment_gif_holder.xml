@@ -12,12 +12,13 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:id="@+id/current_status"
-        android:textSize="50px">
+        android:gravity="center"
+        android:textSize="100px">
     </TextView>
 
     <WebView
-        android:id="@+id/gif"
         android:layout_below="@+id/current_status"
+        android:id="@+id/gif"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></WebView>
     </RelativeLayout>
